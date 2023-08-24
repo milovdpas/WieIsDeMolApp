@@ -37,7 +37,7 @@ const useInitialURL = (navigation: NavigationProp<any>, disabled: boolean = fals
             }
             url = decodeURIComponent(url);
             //Check if initialUrl is correct url consisting of access_token and uuid
-            if (url.match('verbouwen://group_id=.*')) {
+            if (url.match('wieisdemol://group_id=.*')) {
                 const groupId = extractGroupIdFromURL(url);
                 if (user) {
                     try {

@@ -52,15 +52,26 @@ export const Spacing = {
 };
 
 export const Colors: any = {
-  black: '#000000',
-  white: '#FFFFFF',
+  black: '#111112',
+  white: '#E8E8E8',
+  green: '#21C452',
+  darkgreen: '#168236',
   grey: '#7b7b7b',
   purple: '#230233',
   lightPurple: '#75627B',
   red: '#FF5644',
   pink: '#FF04CD',
   orange: '#FF7F0D',
+  primary: '#111112',
+  secondary: '#168236',
+  textColor: '#E8E8E8',
+  transparent: 'transparent'
 };
+
+export const Gradients: any = {
+  primary: [Colors.darkgreen, Colors.green],
+  secondary: [Colors.black, Colors.green, Colors.black]
+}
 
 export const Border = {
   rounded: 10,

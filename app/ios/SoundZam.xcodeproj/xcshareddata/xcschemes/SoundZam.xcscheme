@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "commvdpsolutionssplitscorito.commvdpsolutionssplitscorito"
-               BlueprintName = "commvdpsolutionssplitscorito"
-               ReferencedContainer = "container:commvdpsolutionssplitscorito.xcodeproj">
+               BuildableName = "commvdpsolutionswieisdemol.commvdpsolutionswieisdemol"
+               BlueprintName = "commvdpsolutionswieisdemol"
+               ReferencedContainer = "container:commvdpsolutionswieisdemol.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "commvdpsolutionssplitscoritoTests.xctest"
-               BlueprintName = "commvdpsolutionssplitscoritoTests"
-               ReferencedContainer = "container:commvdpsolutionssplitscorito.xcodeproj">
+               BuildableName = "commvdpsolutionswieisdemolTests.xctest"
+               BlueprintName = "commvdpsolutionswieisdemolTests"
+               ReferencedContainer = "container:commvdpsolutionswieisdemol.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "commvdpsolutionssplitscorito.commvdpsolutionssplitscorito"
-            BlueprintName = "commvdpsolutionssplitscorito"
-            ReferencedContainer = "container:commvdpsolutionssplitscorito.xcodeproj">
+            BuildableName = "commvdpsolutionswieisdemol.commvdpsolutionswieisdemol"
+            BlueprintName = "commvdpsolutionswieisdemol"
+            ReferencedContainer = "container:commvdpsolutionswieisdemol.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "commvdpsolutionssplitscorito.commvdpsolutionssplitscorito"
-            BlueprintName = "commvdpsolutionssplitscorito"
-            ReferencedContainer = "container:commvdpsolutionssplitscorito.xcodeproj">
+            BuildableName = "commvdpsolutionswieisdemol.commvdpsolutionswieisdemol"
+            BlueprintName = "commvdpsolutionswieisdemol"
+            ReferencedContainer = "container:commvdpsolutionswieisdemol.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -5,7 +5,7 @@ import {
     TextStyle,
     TouchableOpacity,
 } from 'react-native';
-import {Border, Spacing, Colors} from '../../assets/Stylesheet';
+import {Border, Spacing, Gradients} from '../../assets/Stylesheet';
 import {Shadow} from 'react-native-shadow-2';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -30,7 +30,7 @@ const RoundButton = (
         size = 'big',
         onPress,
         disabled = false,
-        fabric = false,
+        fabric = true,
         shadow = true,
     }: ButtonProps) => {
     const GetButton = () => {
@@ -41,7 +41,7 @@ const RoundButton = (
                 onPress={onPress}
                 disabled={disabled}>
                 <LinearGradient
-                    colors={Array.isArray(colors) ? colors : buttonColors[colors]}
+                    colors={Array.isArray(colors) ? colors : Gradients[colors]}
                     style={[style, styles.button, buttonSizes[size]]}>
                     {children}
                 </LinearGradient>
@@ -50,7 +50,7 @@ const RoundButton = (
             <TouchableOpacity
                 accessibilityRole={'button'}
                 accessibilityHint={accessibilityHint}
-                style={[style, styles.rounded, styles.button, buttonSizes[size], {backgroundColor: Array.isArray(colors) ? colors[0] : buttonColors[colors][0]}]}
+                style={[style, styles.rounded, styles.button, buttonSizes[size], {backgroundColor: Array.isArray(colors) ? colors[0] : Gradients[colors][0]}]}
                 onPress={onPress}
                 disabled={disabled}>
                 {children}
@@ -79,11 +79,6 @@ const styles = StyleSheet.create({
         borderRadius: Border.round,
     },
 });
-
-const buttonColors = {
-    'primary': [Colors.orange, Colors.red],
-    'secondary': [Colors.red, Colors.pink],
-};
 
 const shadowSizes = {
     small: 15,

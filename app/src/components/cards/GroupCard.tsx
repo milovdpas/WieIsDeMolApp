@@ -29,7 +29,7 @@ const GroupCard = ({navigation, group}: GroupCardProps) => {
             style={[
                 styles.groupCard,
                 {
-                    backgroundColor: '#421F4D',
+                    backgroundColor: Colors.secondary,
                 },
             ]}>
             <Image

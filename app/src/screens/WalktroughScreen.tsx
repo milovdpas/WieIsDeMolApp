@@ -17,19 +17,19 @@ const WalktroughScreen = ({navigation}: any) => {
     const [index, setIndex] = useState<number>(0);
     const items = [
         {
-            icon: 'hand-clap',
-            title: 'Welcome',
-            description: 'Welcome to this lovely app that is been programmed for this vacation'
+            icon: 'fingerprint',
+            title: 'Welkom',
+            description: 'Welkom op de app voor Wie is de mol voor het komende weekend!'
         },
         {
-            icon: 'heart',
+            icon: 'information-variant',
             title: 'Concept',
-            description: 'This app will be used for administrative services. When somebody kisses or fucks someone he or she will receive points by the admin.'
+            description: 'Deze app zal worden gebruikt om de puntentelling bij te houden van het wie is de mol spel. De puntentelling zal worden bijgehouden door Kjelt van Tol.'
         },
         {
             icon: 'trophy',
-            title: 'May the best win',
-            description: 'Get money, fuck bitches or die tryin'
+            title: 'Moge de beste winnen',
+            description: 'Veel plezier en laat je niet bespelen door de mol!'
         }
     ];
     const carouselRef = React.useRef<ICarouselInstance>(null);
@@ -61,7 +61,7 @@ const WalktroughScreen = ({navigation}: any) => {
                 width={Dimensions.get('window').width}
                 height={Dimensions.get('window').height}
                 ref={carouselRef}
-                style={{width: "100%", height: '75%'}}
+                style={{width: "100%", height: '90%'}}
                 loop={false}
                 autoPlay={false}
                 pagingEnabled={true}
@@ -84,21 +84,21 @@ const WalktroughScreen = ({navigation}: any) => {
                 }}>
                 <RoundButton
                     size={'small'}
-                    colors={index === 0 ? 'primary' : [Colors.lightPurple, Colors.lightPurple]}
+                    colors={index === 0 ? 'primary' : [Colors.white, Colors.white]}
                     disabled={index === 0}
                     shadow={index === 0}
                     accessibilityHint={'Go to slide 1'}
                     onPress={() => scrollTo(0)}/>
                 <RoundButton
                     size={'small'}
-                    colors={index === 1 ? 'primary' : [Colors.lightPurple, Colors.lightPurple]}
+                    colors={index === 1 ? 'primary' : [Colors.white, Colors.white]}
                     disabled={index === 1}
                     shadow={index === 1}
                     accessibilityHint={'Go to slide 2'}
                     onPress={() => scrollTo(1)}/>
                 <RoundButton
                     size={'small'}
-                    colors={index === 2 ? 'primary' : [Colors.lightPurple, Colors.lightPurple]}
+                    colors={index === 2 ? 'primary' : [Colors.white, Colors.white]}
                     disabled={index === 2}
                     shadow={index === 2}
                     accessibilityHint={'Go to slide 3'}

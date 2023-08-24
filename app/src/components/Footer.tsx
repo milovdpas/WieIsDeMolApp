@@ -17,8 +17,8 @@ const Footer = ({start = false, children}: FooterProps) => {
           flexDirection: 'column',
           padding: '5%',
       }}>
-      <Text size={'xs'} alignment={'center'} color={Colors.lightPurple}>
-          This app is made by Milo van der Pas
+      <Text size={'xs'} alignment={'center'} color={Colors.textColor}>
+          Deze app is gemaakt door Milo van der Pas
       </Text>
   </View>;
 };

@@ -31,23 +31,23 @@ export const WalkthroughCard: React.FC<Props> = (props) => {
                     colors={'primary'}
                     size={'small'}
                     disabled={true}>
-                    <MIcon name={icon} size={40} color={Colors.white}/>
+                    <MIcon name={icon} size={40} color={Colors.textColor}/>
                 </RoundButton>
                 <Text
                     size={'xl'}
-                    color={Colors.white}
+                    color={Colors.textColor}
                     alignment={'center'}
                     style={{marginTop: Spacing.small, marginBottom: Spacing.small}}>
                     {title}
                 </Text>
                 <Text
                     size={'m'}
-                    color={Colors.lightPurple}
+                    color={Colors.green}
                     style={{marginBottom: Spacing.extraLarge}}>
                     {description}
                 </Text>
                 {isLast && (<TouchableOpacity onPress={onLast}>
-                    <Text size={'l'} color={Colors.orange} fontStyle={'bold'}>
+                    <Text size={'l'} color={Colors.darkgreen} fontStyle={'bold'}>
                         GOT IT
                     </Text>
                 </TouchableOpacity>)}

@@ -1,7 +1,7 @@
-import {ActivityIndicator, Dimensions, FlatList, Share, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, Dimensions, FlatList, Share, View} from 'react-native';
 import {useEffect, useState} from 'react';
 import React from 'react'
-import {Border, Colors, Spacing} from '../assets/Stylesheet';
+import {Colors, Spacing} from '../assets/Stylesheet';
 import Footer from '../components/Footer';
 import Group from "../models/Group";
 import Text from "../components/Text";
@@ -12,6 +12,7 @@ import useInitialURL from "../utils/hooks/UseInitialUrl";
 import UserScoreCard from "../components/cards/UserScoreCard";
 import Axios from "../utils/modules/Axios";
 import {useUser} from "../utils/contexts/UserContext";
+import {API_URL} from '@env';
 
 const GroupAdminScreen = ({navigation, route}: any) => {
     useInitialURL(navigation);
@@ -37,8 +38,11 @@ const GroupAdminScreen = ({navigation, route}: any) => {
 
     const share = async () => {
         await Share.share({
-            url:
-                `verbouwen://group_id=${group.id}`,
+            title:'Wie is de mol uitnodiging link',
+            // Android
+            message: `${API_URL}/api/link/wieisdemol/${group.id}`,
+            //ios
+            url: `${API_URL}/api/link/wieisdemol/${group.id}`,
         });
     };
 
@@ -46,7 +50,7 @@ const GroupAdminScreen = ({navigation, route}: any) => {
         <View style={{width: '100%', height: windowHeight - headerHeight, paddingHorizontal: Spacing.medium}}>
             {
                 user && group.owner.id === user.id && (
-                    <Button style={{width: '75%'}} onPress={share}><Text>Invite people</Text>
+                    <Button style={{width: '75%', alignSelf: 'center'}} onPress={share}><Text>Mensen uitnodigen</Text>
                     </Button>
                 )
             }
@@ -58,13 +62,13 @@ const GroupAdminScreen = ({navigation, route}: any) => {
                     paddingTop: Spacing.small,
                 }}>
                 <Text size="xl" fontStyle="bold" alignment={'center'} style={{marginBottom: Spacing.medium}}>
-                    Group {group.name} Admin
+                    Groep {group.name} Admin
                 </Text>
                 {isLoading ? (
-                    <ActivityIndicator color={Colors.white}/>
+                    <ActivityIndicator color={Colors.textColor}/>
                 ) : userScores.length === 0 ? (
-                    <Text size={'l'} color={Colors.white} fontStyle={'bold'}>
-                        No users available
+                    <Text size={'l'} color={Colors.textColor} fontStyle={'bold'}>
+                        Geen spelers beschikbaar
                     </Text>
                 ) : (
                     <FlatList

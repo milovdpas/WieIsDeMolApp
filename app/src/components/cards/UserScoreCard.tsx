@@ -39,7 +39,7 @@ const UserScoreCard = ({groupId, userScore, nr, edit = false}: GroupCardProps) =
             style={[
                 styles.card,
                 {
-                    backgroundColor: '#421F4D',
+                    backgroundColor: Colors.secondary,
                 },
             ]}>
             {

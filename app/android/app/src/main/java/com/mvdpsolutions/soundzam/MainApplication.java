@@ -1,4 +1,4 @@
-package com.mvdpsolutions.splitscorito;
+package com.mvdpsolutions.wieisdemol;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

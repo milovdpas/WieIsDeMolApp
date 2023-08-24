@@ -1,7 +1,7 @@
 import {ActivityIndicator, FlatList, Platform, StyleSheet, TextInput, View, Dimensions, Alert} from 'react-native';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import React from 'react'
-import {Border, Colors, Spacing} from '../assets/Stylesheet';
+import {Border, Colors, Gradients, Spacing} from '../assets/Stylesheet';
 import Footer from '../components/Footer';
 import Group from "../models/Group";
 import Text from "../components/Text";
@@ -16,12 +16,14 @@ import {useUser} from "../utils/contexts/UserContext";
 import Axios from "../utils/modules/Axios";
 import Button from "../components/buttons/Button";
 import FormData from "form-data";
-import { useHeaderHeight } from '@react-navigation/elements';
+import {useHeaderHeight} from '@react-navigation/elements';
 import useInitialURL from "../utils/hooks/UseInitialUrl";
+import {useNetInfo} from "@react-native-community/netinfo";
 
 const HomeScreen = ({navigation, route}: any) => {
     useInitialURL(navigation, route.params?.group);
-    const {user}=useUser();
+    const {user} = useUser();
+    const netInfo = useNetInfo();
     const headerHeight = useHeaderHeight();
     const windowHeight = Dimensions.get("window").height;
     const [groups, setGroups] = useState<Array<Group>>([]);
@@ -29,33 +31,45 @@ const HomeScreen = ({navigation, route}: any) => {
 
     const snapPoints = useMemo(() => [Platform.OS === 'ios' ? '90%' : '95%'], []);
     const bottomSheetRef = useRef<BottomSheetModal>(null);
+    let textInputRef = useRef<TextInput>(null);
     const [groupName, setGroupName] = useState<string>('');
     const [inputImage, setInputImage] = useState<FileSelectedData | null>(null);
     const [disableSubmit, setDisableSubmit] = useState<boolean>(false);
 
-    const checkIfIdExists = useCallback((list: Group[], id: string) : boolean => {
+    const checkIfIdExists = useCallback((list: Group[], id: string): boolean => {
         return list.some(group => group.id === id);
     }, []);
 
     useEffect(() => {
         const addedGroup = route.params?.group;
-        if(!addedGroup || checkIfIdExists(groups, addedGroup.id))
+        if (!addedGroup || checkIfIdExists(groups, addedGroup.id))
             return;
         const newGroups = [...groups, addedGroup];
         setGroups(newGroups)
     }, [route, checkIfIdExists]);
 
     useEffect(() => {
-        if(!user)
+        if (!user)
             return;
-        Axios.get(`/users/${user.id}/groups`).then(response => {
-            if(response.status !== 200)
-                return;
-            let newGroups = response.data.data as Group[];
-            setGroups(newGroups);
+        if(!netInfo || netInfo.isConnected === null)
+            return;
+        if (!netInfo.isConnected) {
+            Alert.alert('Geen internet connectie');
+            return;
+        }
+        try {
+            Axios.get(`/users/${user.id}/groups`).then(response => {
+                if (response.status !== 200)
+                    return;
+                let newGroups = response.data.data as Group[];
+                setGroups(newGroups);
+                setIsLoading(false);
+            });
+        } catch (e) {
             setIsLoading(false);
-        });
-    }, [user, checkIfIdExists]);
+            console.log(JSON.stringify(e));
+        }
+    }, [user, netInfo, setIsLoading]);
 
     const openSheet = () => {
         if (!bottomSheetRef || !bottomSheetRef.current) {
@@ -69,21 +83,21 @@ const HomeScreen = ({navigation, route}: any) => {
     };
 
     const createGroup = async () => {
-        if(!user || disableSubmit)
+        if (!user || disableSubmit)
             return;
-        if(!groupName){
+        if (!groupName) {
             Alert.alert('Group name is required');
             return;
         }
         setDisableSubmit(true);
         const data = new FormData();
         data.append('name', groupName);
-        if(inputImage != null)
+        if (inputImage != null)
             data.append('image', inputImage);
         const response = await Axios.post(`/users/${user.id}/groups`, data);
-        if(response.status !== 200)
+        if (response.status !== 200)
             return;
-        setGroupName('');
+        textInputRef.current?.clear();
         setInputImage(null);
         setGroups([...groups, response.data.data as Group]);
         closeSheet();
@@ -101,13 +115,13 @@ const HomeScreen = ({navigation, route}: any) => {
                         paddingTop: Spacing.small,
                     }}>
                     <Text size="xl" fontStyle="bold" style={{marginBottom: Spacing.medium}}>
-                        Groups
+                        Groepen
                     </Text>
                     {isLoading ? (
-                        <ActivityIndicator color={Colors.white} />
+                        <ActivityIndicator color={Colors.textColor}/>
                     ) : groups.length === 0 ? (
-                        <Text size={'l'} color={Colors.white} fontStyle={'bold'}>
-                            No groups available
+                        <Text size={'l'} color={Colors.textColor} fontStyle={'bold'}>
+                            Geen groepen beschikbaar
                         </Text>
                     ) : (
                         <FlatList
@@ -123,10 +137,10 @@ const HomeScreen = ({navigation, route}: any) => {
                         colors={'primary'}
                         size={'small'}
                         onPress={openSheet}>
-                        <MIcon name={'plus'} size={40} color={Colors.white}/>
+                        <MIcon name={'plus'} size={40} color={Colors.textColor}/>
                     </RoundButton>
                 </View>
-                <View style={{ flex: 1, }}/>
+                <View style={{flex: 1,}}/>
                 <Footer start={false}/>
             </View>
             <BottomSheetModal
@@ -148,25 +162,31 @@ const HomeScreen = ({navigation, route}: any) => {
                     />
                 </View>
                 <View style={{flex: 1, padding: Spacing.medium}}>
-                    <Text size={'l'} color={Colors.black} fontStyle={'bold'}>Create group</Text>
-                    <Text size={'s'} color={Colors.black} fontStyle={'bold'}>Group name*</Text>
+                    <Text size={'l'} color={Colors.black} fontStyle={'bold'}>Groep aanmaken</Text>
+                    <Text size={'s'} color={Colors.black} fontStyle={'bold'}>Groepsnaam*</Text>
                     <TextInput
+                        ref={textInputRef}
                         style={styles.input}
-                        placeholder={'Type group name'}
-                        placeholderTextColor={Colors.purple}
+                        placeholder={'Voer groepsnaam in'}
+                        placeholderTextColor={Colors.black}
                         onChangeText={setGroupName}
-                        value={groupName}
                     />
-                    <Text size={'s'} color={Colors.black} fontStyle={'bold'}>Upload group picture</Text>
+                    <Text size={'s'} color={Colors.black} fontStyle={'bold'}>Upload een groepsfoto</Text>
                     <ImageSelector
                         onImageSelected={(image: FileSelectedData | null) => {
                             setInputImage(image);
                         }}
                     />
-                    <Button style={{width: '100%', marginTop: Spacing.medium, borderRadius: Border.rounded, flexDirection: 'row'}}
-                            disabled={disableSubmit} onPress={createGroup} colors={[Colors.purple,Colors.purple]}>
-                        <Text>Create group</Text>
-                        { disableSubmit && (<ActivityIndicator style={{marginLeft: Spacing.small}} color={Colors.white} />)}
+                    <Button style={{
+                        width: '100%',
+                        marginTop: Spacing.medium,
+                        borderRadius: Border.rounded,
+                        flexDirection: 'row'
+                    }}
+                            disabled={disableSubmit} onPress={createGroup} colors={Gradients.primary}>
+                        <Text>Groep aanmaken</Text>
+                        {disableSubmit && (
+                            <ActivityIndicator style={{marginLeft: Spacing.small}} color={Colors.white}/>)}
                     </Button>
                 </View>
             </BottomSheetModal>

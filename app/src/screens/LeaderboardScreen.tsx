@@ -1,4 +1,4 @@
-import {ActivityIndicator, Dimensions, FlatList, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, Dimensions, FlatList, View} from 'react-native';
 import {useEffect, useState} from 'react';
 import React from 'react'
 import {Colors, Spacing} from '../assets/Stylesheet';
@@ -45,10 +45,10 @@ const LeaderboardScreen = ({navigation, route}: any) => {
                     Leaderboard {group.name}
                 </Text>
                 {isLoading ? (
-                    <ActivityIndicator color={Colors.white}/>
+                    <ActivityIndicator color={Colors.textColor}/>
                 ) : userScores.length === 0 ? (
-                    <Text size={'l'} color={Colors.white} fontStyle={'bold'}>
-                        No users available
+                    <Text size={'l'} color={Colors.textColor} fontStyle={'bold'}>
+                        Geen spelers beschikbaar
                     </Text>
                 ) : (
                     <FlatList

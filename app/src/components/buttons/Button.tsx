@@ -5,7 +5,7 @@ import {
     TextStyle,
     TouchableOpacity, View,
 } from 'react-native';
-import {Border, Spacing, Colors} from '../../assets/Stylesheet';
+import {Border, Spacing, Colors, Gradients} from '../../assets/Stylesheet';
 import LinearGradient from 'react-native-linear-gradient';
 
 type ButtonProps = {
@@ -37,13 +37,13 @@ const Button = (
         disabled={disabled}>
         {fabric ? (
             <LinearGradient
-                colors={Array.isArray(colors) ? colors : buttonColors[colors]}
+                colors={Array.isArray(colors) ? colors : Gradients[colors]}
                 style={[style, styles.button, {color: textColor}]}>
                 {children}
             </LinearGradient>
         ) : (
             <View
-                style={[style, styles.button, {backgroundColor: (Array.isArray(colors) ? colors[0] : buttonColors[colors][0])}, {color: textColor}]}>
+                style={[style, styles.button, {backgroundColor: (Array.isArray(colors) ? colors[0] : Gradients[colors][0])}, {color: textColor}]}>
                 {children}
             </View>
         )}
@@ -65,10 +65,5 @@ const styles = StyleSheet.create({
         paddingHorizontal: Spacing.medium
     },
 });
-
-const buttonColors = {
-    'primary': [Colors.orange, Colors.red],
-    'secondary': [Colors.red, Colors.pink],
-};
 
 export default Button;

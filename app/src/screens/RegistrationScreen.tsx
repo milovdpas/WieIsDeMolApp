@@ -12,12 +12,14 @@ import FormData from 'form-data';
 import User from '../models/User';
 import useInitialURL from "../utils/hooks/UseInitialUrl";
 import Group from "../models/Group";
+import {useNetInfo} from "@react-native-community/netinfo";
 
 const RegistrationScreen = ({navigation, route}: any) => {
     const groupId: string | undefined = route.params?.groupId;
     if(!groupId)
         useInitialURL(navigation);
     const {user, setUser} = useUser();
+    const netInfo = useNetInfo();
     const [name, onChangeName] = useState<string>('');
     const [disableSubmit, setDisableSubmit] = useState<boolean>(false);
 
@@ -31,7 +33,11 @@ const RegistrationScreen = ({navigation, route}: any) => {
 
     const submit = async () => {
         if(!name){
-            Alert.alert('Username is required');
+            Alert.alert('Gebruikersnaam is verplicht');
+            return;
+        }
+        if(!netInfo.isConnected){
+            Alert.alert('Geen internet connectie');
             return;
         }
         setDisableSubmit(true);
@@ -76,19 +82,19 @@ const RegistrationScreen = ({navigation, route}: any) => {
                     paddingTop: Spacing.extraLarge,
                 }}>
                 <Text size="xl" fontStyle="bold" style={{marginBottom: Spacing.medium}}>
-                    Let's create an user
+                    Laten we een gebruiker aanmaken
                 </Text>
                 <TextInput
                     style={styles.input}
-                    placeholder={'Type username'}
-                    placeholderTextColor={Colors.white}
+                    placeholder={'Voer gebruikersnaam in'}
+                    placeholderTextColor={Colors.textColor}
                     onChangeText={onChangeName}
                     value={name}
                 />
                 <Button style={{width: '100%', marginTop: Spacing.medium}} onPress={submit} disabled={disableSubmit}>
                    <View style={{width: 200, flexDirection: 'row', justifyContent: 'center'}}>
-                       <Text>Register</Text>
-                       { disableSubmit && (<ActivityIndicator style={{marginLeft: Spacing.small}} color={Colors.white} />)}
+                       <Text>Registreren</Text>
+                       { disableSubmit && (<ActivityIndicator style={{marginLeft: Spacing.small}} color={Colors.textColor} />)}
                    </View>
                 </Button>
             </View>

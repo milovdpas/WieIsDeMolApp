@@ -18,7 +18,7 @@ const Text = ({
   accessible = true,
   children,
   style = {},
-  color = Colors.white,
+  color = Colors.textColor,
   alignment = 'auto',
   fontStyle = 'medium',
   size = 'm',

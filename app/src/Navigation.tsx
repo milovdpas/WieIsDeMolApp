@@ -21,7 +21,7 @@ const StartRouting = () => {
                 animation: 'fade',
                 animationDuration: 100,
                 contentStyle: {
-                    backgroundColor: Colors.purple,
+                    backgroundColor: Colors.transparent,
                 },
             }}>
             <MainStack.Screen name="Start" component={WalktroughScreen}/>
@@ -34,8 +34,13 @@ const StartRouting = () => {
 const headerStyling = {
     title: '',
     headerStyle: {
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        shadowOpacity: 0,
+        borderBottomWidth: 0,
     },
+    headerShadowVisible: false,
+    headerBackTitleVisible: false,
     headerTintColor: Colors.white,
 };
 
@@ -47,7 +52,7 @@ const HomeRouting = () => {
                 animation: 'fade',
                 animationDuration: 100,
                 contentStyle: {
-                    backgroundColor: Colors.purple,
+                    backgroundColor: Colors.transparent,
                 },
             }}
             initialRouteName="Home">

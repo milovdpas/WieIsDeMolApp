@@ -6244,7 +6244,7 @@ index 0000000..704195d
 +++ b/node_modules/react-native-vector-icons/android/build/intermediates/lint_model_metadata/release/lint-model-metadata.properties
 @@ -0,0 +1,2 @@
 +mavenArtifactId=react-native-vector-icons
-+mavenGroupId=SplitScorito
++mavenGroupId=WieIsDeMol
 \ No newline at end of file
 diff --git a/node_modules/react-native-vector-icons/android/build/intermediates/local_aar_for_lint/release/out.aar b/node_modules/react-native-vector-icons/android/build/intermediates/local_aar_for_lint/release/out.aar
 new file mode 100644
@@ -9381,7 +9381,7 @@ index 5485fac..39be2b7 100644
 --- a/node_modules/react-native-vector-icons/fonts.gradle
 +++ b/node_modules/react-native-vector-icons/fonts.gradle
 @@ -26,6 +26,10 @@ afterEvaluate {
- 
+
      android.applicationVariants.all { def variant ->
          def targetName = variant.name.capitalize()
 +        def lintVitalAnalyzeTask = tasks.findByName("lintVitalAnalyze${targetName}")
